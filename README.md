@@ -15,7 +15,7 @@ Without this the fuse mount will not propagate back to the host.
 
 ````
 # Ensure docker daemon uses shared mount flags
-sed -i 's/MountFlags=slave/#MountFlags=shared/' /etc/systemd/system/docker.service
+sed -i 's/MountFlags=\(private\|slave\)/MountFlags=shared/' /etc/systemd/system/docker.service
 systemctl daemon-reload
 systemctl restart docker.service
 
