@@ -2,6 +2,8 @@
 * Docker image to mount a google drive with google-drive-ocamlfuse shared with host.
 
 ### Environment Variables
+* `PUID`: User ID to run google-drive-ocamlfuse
+* `PGID`: Group ID to run google-drive-ocamlfuse
 * `CLIENT_ID`: Google oAuth client ID without trailing `.apps.googleusercontent.com`
 * `CLIENT_SECRET`: Google oAuth client secret
 * `VERIFICATION_CODE`: Google oAuth verification code obtained from the following URL with client_id substituted:

@@ -1,9 +1,11 @@
 FROM ubuntu:xenial
 MAINTAINER Mitchell Hewes <me@mitcdh.com>
 
-ENV DRIVE_PATH "/drive"
+ENV DRIVE_PATH="/drive" OVERLAY_VERSION="v1.19.1.1" OVERLAY_ARCH="amd64"
 
-RUN echo "deb http://ppa.launchpad.net/alessandro-strada/ppa/ubuntu xenial main" >> /etc/apt/sources.list \
+RUN curl -o /tmp/s6-overlay.tar.gz -L "https://github.com/just-containers/s6-overlay/releases/download/${OVERLAY_VERSION}/s6-overlay-${OVERLAY_ARCH}.tar.gz" \
+ && tar xfz /tmp/s6-overlay.tar.gz -C / \
+ && echo "deb http://ppa.launchpad.net/alessandro-strada/ppa/ubuntu xenial main" >> /etc/apt/sources.list \
  && echo "deb-src http://ppa.launchpad.net/alessandro-strada/ppa/ubuntu xenial main" >> /etc/apt/sources.list \
  && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys F639B041 \
  && apt-get update \

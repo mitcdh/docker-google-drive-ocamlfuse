@@ -1,6 +1,8 @@
 #!/bin/sh
 
 DRIVE_PATH=/mnt/gdrive
+PUID=${PUID:-0}
+PGID=${PGID:-0}
 
 if [ -e "~/.gdfuse/default/config" ]; then
 	echo "existing google-drive-ocamlfuse config found"
@@ -17,10 +19,10 @@ else
 	else
 		echo "initilising google-drive-ocamlfuse..."
 		echo "${VERIFICATION_CODE}" | \
-			google-drive-ocamlfuse -headless -id "${CLIENT_ID}.apps.googleusercontent.com" -secret "${CLIENT_SECRET}"
+			s6-setuidgid ${PUID}:${PGID} google-drive-ocamlfuse -headless -id "${CLIENT_ID}.apps.googleusercontent.com" -secret "${CLIENT_SECRET}"
 	fi
 fi
 
 echo "mounting at ${DRIVE_PATH}"
-google-drive-ocamlfuse "${DRIVE_PATH}"
+s6-setuidgid ${PUID}:${PGID} google-drive-ocamlfuse "${DRIVE_PATH}"
 tail -f /dev/null & wait
