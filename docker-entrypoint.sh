@@ -18,10 +18,6 @@ else
             echo "no VERIFICATION_CODE found -> EXIT"
             exit 1
         else
-                echo "creating user/group"
-                groupadd -g $PGID gdfuser
-                useradd -g gdfuser -c "Google Drive Fuser" -d "/config" -u $PUID gdfuser
-
                 echo "initilising google-drive-ocamlfuse..."
                 echo "${VERIFICATION_CODE}" | \
                         google-drive-ocamlfuse -headless -id "${CLIENT_ID}.apps.googleusercontent.com" -secret "${CLIENT_SECRET}"
