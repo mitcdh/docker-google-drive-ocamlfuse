@@ -1,8 +1,11 @@
 #!/bin/sh
 
 DRIVE_PATH=/mnt/gdrive
-PUID=${PUID:-0}
-PGID=${PGID:-0}
+PUID=${PUID:-1000}
+PGID=${PGID:-1000}
+
+groupadd -g $PGID gdfuser
+useradd -g gdfuser -c "Google Drive Fuser" -d "/config" -u $PUID gdfuser 
 
 if [ -e "/config/gdrive" ]; then
 	echo "existing google-drive-ocamlfuse config found"
@@ -19,10 +22,10 @@ else
 	else
 		echo "initilising google-drive-ocamlfuse..."
 		echo "${VERIFICATION_CODE}" | \
-			s6-setuidgid ${PUID}:${PGID} google-drive-ocamlfuse -headless -id "${CLIENT_ID}.apps.googleusercontent.com" -secret "${CLIENT_SECRET}" -config /config/gdrive
+			s6-setuidgid gdfuser google-drive-ocamlfuse -headless -id "${CLIENT_ID}.apps.googleusercontent.com" -secret "${CLIENT_SECRET}"
 	fi
 fi
 
 echo "mounting at ${DRIVE_PATH}"
-s6-setuidgid ${PUID}:${PGID} google-drive-ocamlfuse "${DRIVE_PATH}" -config /config/gdrive
+s6-setuidgid gdfuser google-drive-ocamlfuse "${DRIVE_PATH}"
 tail -f /dev/null & wait

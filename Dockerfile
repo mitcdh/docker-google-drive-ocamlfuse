@@ -13,7 +13,10 @@ RUN tar xfz /tmp/s6-overlay.tar.gz -C / \
  && apt-get install -yy google-drive-ocamlfuse \
  && apt-get clean all \
  && rm /var/log/apt/* /var/log/alternatives.log /var/log/bootstrap.log /var/log/dpkg.log
+ && 
 
 COPY docker-entrypoint.sh /usr/local/bin/
+
+VOLUME /config
 
 CMD ["docker-entrypoint.sh"]
