@@ -1,14 +1,13 @@
 #!/bin/sh
 
 DRIVE_PATH=/mnt/gdrive
+
 PUID=${PUID:-1000}
 PGID=${PGID:-1000}
 
-groupadd -g $PGID gdfuser
-useradd -g gdfuser -c "Google Drive Fuser" -d "/config" -u $PUID gdfuser
 export HOME=/config
 
-if [ -e "/config/gdrive" ]; then
+if [ -e "~/.gdfuse/default/config" ]; then
 	echo "existing google-drive-ocamlfuse config found"
 else
 	if [ -z "${CLIENT_ID}" ]; then
@@ -21,6 +20,10 @@ else
 	    echo "no VERIFICATION_CODE found -> EXIT"
 	    exit 1
 	else
+		echo "creating user/group"
+		groupadd -g $PGID gdfuser
+		useradd -g gdfuser -c "Google Drive Fuser" -d "/config" -u $PUID gdfuser
+
 		echo "initilising google-drive-ocamlfuse..."
 		echo "${VERIFICATION_CODE}" | \
 			s6-setuidgid gdfuser google-drive-ocamlfuse -headless -id "${CLIENT_ID}.apps.googleusercontent.com" -secret "${CLIENT_SECRET}"
