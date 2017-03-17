@@ -5,7 +5,8 @@ PUID=${PUID:-1000}
 PGID=${PGID:-1000}
 
 groupadd -g $PGID gdfuser
-useradd -g gdfuser -c "Google Drive Fuser" -d "/config" -u $PUID gdfuser 
+useradd -g gdfuser -c "Google Drive Fuser" -d "/config" -u $PUID gdfuser
+export HOME=/config
 
 if [ -e "/config/gdrive" ]; then
 	echo "existing google-drive-ocamlfuse config found"
