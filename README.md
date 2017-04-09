@@ -6,8 +6,8 @@
 * `PGID`: Group ID to run google-drive-ocamlfuse
 * `CLIENT_ID`: Google oAuth client ID without trailing `.apps.googleusercontent.com`
 * `CLIENT_SECRET`: Google oAuth client secret
-* `VERIFICATION_CODE`: Google oAuth verification code obtained from the following URL with client_id substituted:
-    - `https://accounts.google.com/o/oauth2/auth?client_id=${CLIENT_ID}.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fdrive&response_type=code&access_type=offline&approval_prompt=force"`
+* `VERIFICATION_CODE`: Google oAuth verification code you will need to obtain manually (and prior to launching the container) from accepting the prompts at the following URL with client_id substituted:
+    - `https://accounts.google.com/o/oauth2/auth?client_id=${CLIENT_ID}.apps.googleusercontent.com&redirect_uri=urn%3Aietf%3Awg%3Aoauth%3A2.0%3Aoob&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fdrive&response_type=code&access_type=offline&approval_prompt=force`
 
 ### Host Configuration
 1. If using systemd to manage the docker daemon process make sure that the service is configured either explicitly with a `shared` mountflag or un-configured and defaults to `shared`.
