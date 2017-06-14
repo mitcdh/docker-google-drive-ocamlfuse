@@ -4,6 +4,7 @@
 ### Environment Variables
 * `PUID`: User ID to run google-drive-ocamlfuse
 * `PGID`: Group ID to run google-drive-ocamlfuse
+* `MOUNT_OPTS`: Additional mount options (user_allow_other is configured in /etc/fuse.conf)
 * `CLIENT_ID`: Google oAuth client ID without trailing `.apps.googleusercontent.com`
 * `CLIENT_SECRET`: Google oAuth client secret
 * `VERIFICATION_CODE`: Google oAuth verification code you will need to obtain manually (and prior to launching the container) from accepting the prompts at the following URL with client_id substituted:
@@ -21,7 +22,7 @@ sed -i 's/MountFlags=\(private\|slave\)/MountFlags=shared/' /etc/systemd/system/
 systemctl daemon-reload
 systemctl restart docker.service
 
-# Specify the mount points propagation as shared
+# Specify the mount points propagation as shared (execute as root)
 mount --bind /mnt/drive /mnt/drive
 mount --make-shared /mnt/drive
 ````
