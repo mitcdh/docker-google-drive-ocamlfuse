@@ -9,6 +9,7 @@ RUN echo "deb http://ppa.launchpad.net/alessandro-strada/ppa/ubuntu xenial main"
  && apt-get update \
  && apt-get install -yy google-drive-ocamlfuse fuse \
  && apt-get clean all \
+ && echo "user_allow_other" >> /etc/fuse.conf \
  && rm /var/log/apt/* /var/log/alternatives.log /var/log/bootstrap.log /var/log/dpkg.log
 
 COPY docker-entrypoint.sh /usr/local/bin/
