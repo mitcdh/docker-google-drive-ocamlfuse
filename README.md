@@ -1,5 +1,5 @@
 # Docker google-drive-ocamlfuse
-* Docker image to mount a google drive with google-drive-ocamlfuse shared with host.
+Docker image to mount a google drive with google-drive-ocamlfuse shared with host.
 
 ### Environment Variables
 * `PUID`: User ID to run google-drive-ocamlfuse
