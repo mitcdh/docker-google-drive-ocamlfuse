@@ -1,6 +1,6 @@
 #!/bin/sh
 
-DRIVE_PATH=/mnt/gdrive
+DRIVE_PATH=${DRIVE_PATH:-/mnt/gdrive}
 
 PUID=${PUID:-0}
 PGID=${PGID:-0}
@@ -52,7 +52,5 @@ fi
 
 # mount as the gdfuser user
 echo "mounting at ${DRIVE_PATH}"
-su gdfuser -l -c "google-drive-ocamlfuse \"${DRIVE_PATH}\"\
- -o uid=${PUID},gid=${PGID}${MOUNT_OPTS}"
-
-tail -f /dev/null & wait
+exec su gdfuser -l -c "google-drive-ocamlfuse \"${DRIVE_PATH}\"\
+ -f -o uid=${PUID},gid=${PGID}${MOUNT_OPTS}"
