@@ -1,7 +1,7 @@
 FROM ubuntu:xenial
 MAINTAINER Mitchell Hewes <me@mitcdh.com>
 
-ENV DRIVE_PATH="/drive"
+ENV DRIVE_PATH="/mnt/gdrive"
 
 RUN echo "deb http://ppa.launchpad.net/alessandro-strada/ppa/ubuntu xenial main" >> /etc/apt/sources.list \
  && echo "deb-src http://ppa.launchpad.net/alessandro-strada/ppa/ubuntu xenial main" >> /etc/apt/sources.list \
