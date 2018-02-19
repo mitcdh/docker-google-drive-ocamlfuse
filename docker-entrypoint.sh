@@ -6,13 +6,13 @@ PUID=${PUID:-0}
 PGID=${PGID:-0}
 
 # Create a group for our gid if required
-if [ ! $(getent group gdfuser) ]; then
+if [ -z "$(getent group gdfuser)" ]; then
 	echo "creating gdfuser group for gid ${PGID}"
 	groupadd --gid ${PGID} --non-unique gdfuser >/dev/null 2>&1
 fi
 
 # Create a user for our uid if required
-if [ ! $(getent passwd gdfuser) ]; then
+if [ -z "$(getent passwd gdfuser)" ]; then
 	echo "creating gdfuser group for uid ${PUID}"
 	useradd --gid ${PGID} --non-unique --comment "Google Drive Fuser" \
 	 --home-dir "/config" --create-home \
