@@ -37,7 +37,7 @@ else
 		exit 1
 	else
 		# google-drive-ocamlfuse doesn't clear stdin so pipe works
-		echo "initilising google-drive-ocamlfuse..."
+		echo "initializing google-drive-ocamlfuse..."
 		su gdfuser -l -c  "echo \"${VERIFICATION_CODE}\" | \
 		 google-drive-ocamlfuse -headless \
 		 -id \"${CLIENT_ID}.apps.googleusercontent.com\" \
@@ -46,7 +46,7 @@ else
 fi
 
 # prepend additional mount options with a comma
-if [ -z "${MOUNT_OPTS}" ]; then
+if [ -n "${MOUNT_OPTS}" ]; then
 	MOUNT_OPTS=",${MOUNT_OPTS}"
 fi
 
