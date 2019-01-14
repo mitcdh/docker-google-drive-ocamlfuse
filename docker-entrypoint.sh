@@ -42,6 +42,11 @@ else
 		 google-drive-ocamlfuse -headless \
 		 -id \"${CLIENT_ID}.apps.googleusercontent.com\" \
 		 -secret \"${CLIENT_SECRET}\""
+
+		# set teamdrive config"
+		if [ -n "${TEAM_DRIVE_ID}" ];then
+			sed -i "s/team_drive_id=/team_drive_id=${TEAM_DRIVE_ID}/g" /config/.gdfuse/default/config
+		fi
 	fi
 fi
 
