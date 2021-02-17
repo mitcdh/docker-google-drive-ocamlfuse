@@ -15,3 +15,6 @@ RUN echo "deb http://ppa.launchpad.net/alessandro-strada/ppa/ubuntu xenial main"
 COPY docker-entrypoint.sh /usr/local/bin/
 
 CMD ["docker-entrypoint.sh"]
+
+# healthcheck
+HEALTHCHECK cmd mount | grep -q "google-drive-ocamlfuse" || exit 1
